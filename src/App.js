@@ -1,52 +1,22 @@
 import './App.css';
-
+import Products from './components/Products/Products/Products.jsx';
 import React from 'react';
+import DetailedProduct from './components/Products/DetailedProduct/DetailedProduct.jsx';
+import New from './New/New.jsx';
 
-import { useState } from 'react';
-
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+ 
 function App() {
-
-  const[products, setProducts] = useState([]);
-
-  const dummyproducts = [
-    {
-      id: 1,
-      name: 'Boba milk tea',
-      price: 100,
-      image_url: "https://cdn.shopify.com/s/files/1/0518/3825/5255/files/What-is-boba-tea.png?v=1717983125",
-    },
-    {
-      id: 2,
-      name: 'Oolong milk tea',
-      price: 200,
-      image_url: "https://cdn.shopify.com/s/files/1/0518/3825/5255/files/What-is-boba-tea.png?v=1717983125",
-    },
-    {
-      id: 3,
-      name: 'Green milk tea',
-      price: 300,
-      image_url: "https://cdn.shopify.com/s/files/1/0518/3825/5255/files/What-is-boba-tea.png?v=1717983125",
-    },
-  ];
-
   return (
-  <div>
-    <h1>Drinks</h1>
-    <div className="products">
-      {dummyproducts.map((product) => (
-        <div className="product" key={product.id}>
-          <img src={product.image_url} alt={product.name} />
-            <h2>{product.name}</h2>
-            <p>${product.price}</p>
-        </div>
-      ))}
-    </div>
-
-
-
-
-  </div>
-  ); 
+    <Router>
+      <Routes>
+        <Route path="/" element={<><h1>Boba List</h1></>} />
+        <Route path="/" element={<Products/>} />
+        <Route path="/products/:productId" element={<DetailedProduct/>} />
+        <Route path="/new" element={<><h1>Lei ho</h1></>} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
