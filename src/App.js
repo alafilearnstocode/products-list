@@ -1,43 +1,22 @@
 import './App.css';
-
+import Products from './components/Products/Products/Products.jsx';
 import React from 'react';
+import DetailedProduct from './components/Products/DetailedProduct/DetailedProduct.jsx';
+import New from './New/New.jsx';
 
-import { useState, useEffect } from 'react';
-
-function App() {
-
-  const[products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await fetch('https://disc-product-demo-api.onrender.com/api/products');
-      const data = await response.json();
-      setProducts(data);
-    }
-    
-    fetchProducts();
-  }, [products]);
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
  
-
-  return (  
-  <div>
-    <h1>Drinks</h1>
-    <div className="products">
-      {products.map((product) => (
-        <div className="product" key={product.id}>
-          <img src={product.image_url} alt={product.name} />
-            <h2>{product.name}</h2>
-            <p>${product.price}</p>
-            <p>{product.description}</p>
-        </div>
-      ))}
-    </div>
-
-
-
-
-  </div>
-  ); 
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<><h1>Boba List</h1></>} />
+        <Route path="/" element={<Products/>} />
+        <Route path="/products/:productId" element={<DetailedProduct/>} />
+        <Route path="/new" element={<><h1>Lei ho</h1></>} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
